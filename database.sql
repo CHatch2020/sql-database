@@ -11,13 +11,19 @@ CREATE TABLE "song" (
 	"length" varchar(10),
 	"released" date
 );
-
+-- insert a new artist
 INSERT INTO "artist" 
 ("name", "birthdate")
 VALUES
 ('', '');
-
+-- insert new song
 INSERT INTO "song" 
 ("title", "length", "released")
 VALUES
 ('', '', '');
+-- order artists by age, youngest - oldest
+SELECT * FROM artist
+ORDER BY birthdate DESC
+
+SELECT * FROM song 
+ORDER BY title DESC
