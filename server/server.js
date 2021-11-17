@@ -28,8 +28,9 @@ app.listen(PORT, () => {
 });
 
 // TODO - Replace static content with a database tables
-
+// get table rows from database and send to client
 app.get("/artist", (req, res) => {
+        // get the working sql code to grab artists from DB
   const sqlText = 'SELECT * FROM artist ORDER BY birthdate DESC;'
   pool.query(sqlText)
     .then((dbRes) => {
@@ -40,15 +41,17 @@ app.get("/artist", (req, res) => {
       console.error(dbErr);
     });
 });
-
+// send artists to database
 app.post("/artist", (req, res) => {
   const newArtist = req.body;
+  // grab the working sql code for songs
   const sqlText = (`
     INSERT INTO "artist" 
         ("name", "birthdate")
     VALUES
         ($1, $2);
     `);
+    // assign the data to vlues to be pushed into the DB table
     const sqlValues = [
         newArtist.name,
         newArtist.birthdate
@@ -62,8 +65,9 @@ app.post("/artist", (req, res) => {
         })
     
 });
-
+// get table rows from database and send to client
 app.get("/song", (req, res) => {
+    // get the working sql code to grab songs from DB
     const sqlText = 'SELECT * FROM song ORDER BY title DESC'
     pool.query(sqlText)
       .then((dbRes) => {
@@ -73,15 +77,17 @@ app.get("/song", (req, res) => {
           console.error(dbErr);
       });
 });
-
+// send songs to database
 app.post("/song", (req, res) => {
     const newSong = req.body;
+    // grab the working sql code for songs
     const sqlText = (`
     INSERT INTO "song" 
     ("title", "length", "released")
     VALUES
     ($1, $2, $3);
     `);
+        // assign the data to vlues to be pushed into the DB table
     const sqlValues = [
         newSong.title,
         newSong.length,

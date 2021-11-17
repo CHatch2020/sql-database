@@ -15,6 +15,17 @@ function onReady() {
     getSongs();    
 }
 
+function clearArtistInput(){
+    $('#artist-name').val('');
+    $('#artist-born').val('');
+}; // end clearArtistInput
+
+function clearSongInput(){
+    $('#song-name').val('');
+    $('#song-length').val('');
+    $('#song-released').val('');
+}; // end clearSongInput
+
 function addArtist() {
     // Get info to send to the server
     const artistToSend = {
@@ -70,6 +81,7 @@ function getArtists() {
     }).then(function(response) {
         const listOfArtists = response;
         renderArtists(response);
+        clearArtistInput();
     }).catch(function (error) {
         console.log('error in artist get', error);
     });
@@ -82,6 +94,7 @@ function getSongs() {
         url: '/song'
     }).then(function (response) {
         renderSongs(response);
+        clearSongInput();
     }).catch(function (error) {
         console.log('error in song get', error);
     });
